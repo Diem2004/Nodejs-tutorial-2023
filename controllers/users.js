@@ -8,10 +8,11 @@ import {
   from "../repositories/index.js";
   import {EventEmitter} from 'node:events'
   import HttpStatusCode from "../exceptions/HttpStatusCode.js";
+  import Exception from "../exceptions/Exception.js";
   const myEvent = new EventEmitter()
   //listen 
   myEvent.on('event.register.user', (params) => {
-    console.log(`They talk about: ${JSON.stringify(params)}`)
+    // console.log(`They talk about: ${JSON.stringify(params)}`)
   })
 
 const login = async (req, res) => {
@@ -38,18 +39,30 @@ const register = async (req, res) => {
     password, 
     phoneNumber, 
     address } = req.body;
-  await userRepository.register({
-    name, 
-    email, 
-    password, 
-    phoneNumber, 
-    address })
+  
     //event emitter
     //ko hieu
     myEvent.emit('event.register.user', {email, phoneNumber })
-  res.status(HttpStatusCode.HttpStatusCode.INSERT_OK).json({
-    message: "register user suscessfull",
-  });
+    try{
+      debugger
+      const user = await userRepository.register({
+        name, 
+        email, 
+        password, 
+        phoneNumber, 
+        address })
+        res.status(HttpStatusCode.OK).json({
+          message: "register user suscessfull",
+          data : user
+        })
+    }catch(exception){
+      debugger
+      res.status(HttpStatusCode.HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+        message: exception.toString(),
+      })
+
+    }
+  
 };
 const getDetailUser = async (req, res) => {
   (req, res) => {
@@ -61,3 +74,4 @@ export default {
   register,
   getDetailUser,
 };
+console.log

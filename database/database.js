@@ -7,7 +7,7 @@ async function connect() {
     print("connect mongoose successfull", OutputType.SUCCESS);
     return connection;
   } catch (error) {
-    //let errorMessage = error.code
+    // let errorMessage = error.code
     const { code } = error;
     debugger;
     if (error.code == 8000) {

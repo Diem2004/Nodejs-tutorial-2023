@@ -2,8 +2,8 @@ import express from "express";
 import * as dotenv from "dotenv";
 dotenv.config();
 import connect from "./database/database.js";
-//const error = express();
-//import {body, validatorResult} from 'express-validator'
+const error = express();
+import { body, validationResult } from 'express-validator'
 import { usersRouter, studentsRouter } from "./routes/index.js";
 
 const app = express();
