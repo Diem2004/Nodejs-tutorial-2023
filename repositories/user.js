@@ -6,11 +6,13 @@ const login = async ({ email, password }) => {
   print("login user in user repository ha ha", OutputType.INFORMATION);
 };
 const register = async ({ name, email, password, phoneNumber, address }) => {
+  //<------------------------->
   try{
     debugger
     const existingUser = await User.findOne({email}).exec()
+    //console.log('existingUser:', existingUser)
     if(!!existingUser){
-      throw new Exception(Exception.USER_EXIST)
+    throw new Exception(Exception.USER_EXIST)
     }
     //encrypt password, user bcrypt
     // sử dụng với mục đích đăng nhập
@@ -33,20 +35,24 @@ const register = async ({ name, email, password, phoneNumber, address }) => {
     throw new Exception(Exception.CANNOT_REGISTER_USER)
 
   }
+  //<--------------------->
   // print(
   //   "register user with name:" +
   //     name +
   //     " email:" +
   //     email +
-  //     " password" +
+  //     " password: " +
   //     password +
-  //     " phoneNumber" +
+  //     " phoneNumber: " +
   //     phoneNumber +
   //     " address: " +
-  //     address, OutputType.INFORMATION
+  //    address, 
+  // OutputType.INFORMATION
   // );
+  //<-------------------------->
 };
 export default {
   login,
   register,
 };
+

@@ -51,12 +51,12 @@ const register = async (req, res) => {
         password, 
         phoneNumber, 
         address })
-        res.status(HttpStatusCode.OK).json({
+        res.status(HttpStatusCode.HttpStatusCode.OK).json({
           message: "register user suscessfull",
           data : user
         })
     }catch(exception){
-      debugger
+      //debugger
       res.status(HttpStatusCode.HttpStatusCode.INTERNAL_SERVER_ERROR).json({
         message: exception.toString(),
       })
@@ -73,5 +73,4 @@ export default {
   login,
   register,
   getDetailUser,
-};
-console.log
+}
